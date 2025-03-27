@@ -187,26 +187,50 @@ export default function Home() {
       </section>
 
       {/* INFORMAÇÕES DE LOCAÇÃO */}
-      <section className="border-t border-white/10 bg-white/5 px-6 py-28 text-center">
+      <section className="border-t border-white/10 bg-gradient-to-br from-green-900 via-emerald-800 to-teal-900 px-6 py-28">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mx-auto max-w-3xl"
+          className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2"
         >
-          <h2 className="mb-6 text-4xl font-bold text-lime-300">
-            Procurando um sítio para eventos?
-          </h2>
-          <p className="text-lg leading-relaxed text-white/80">
-            Locação para confraternizações, aniversários, festas e lazer com
-            estrutura completa em meio à natureza. Fale conosco!
-          </p>
-          <p className="text-md mt-6 text-white/70">
-            <strong>📍 Local:</strong> Estrada Geral B. São Brás, 1707 -
-            Balneário Piçarras, SC
-            <br />
-            <strong>📞 Contato:</strong> (47) 99197-1440
-          </p>
+          {/* Bloco de texto */}
+          <div className="text-white">
+            <h2 className="mb-6 text-4xl font-black text-lime-400">
+              🎉 Espaço para Eventos
+            </h2>
+            <p className="text-lg leading-relaxed text-white/80">
+              Locação ideal para{" "}
+              <strong>confraternizações, aniversários, festas</strong> e muito
+              mais — com estrutura completa em meio à natureza.
+            </p>
+            <div className="text-md mt-6 space-y-2 text-white/70">
+              <p>
+                <strong>📍 Local:</strong> Estrada Geral B. São Brás, 1707 -
+                Balneário Piçarras, SC
+              </p>
+              <p>
+                <strong>📞 Contato:</strong> (47) 99197-1440
+              </p>
+            </div>
+          </div>
+
+          {/* Bloco visual com ícone animado */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6, type: "spring" }}
+            className="rounded-3xl border border-lime-400/30 bg-white/5 p-10 text-center shadow-xl backdrop-blur-md"
+          >
+            <div className="mb-4 animate-bounce text-6xl">📍</div>
+            <h3 className="mb-2 text-2xl font-bold text-white">
+              Sítio para seu próximo evento
+            </h3>
+            <p className="text-white/70">
+              Faça momentos incríveis acontecerem em um ambiente natural e
+              aconchegante.
+            </p>
+          </motion.div>
         </motion.div>
       </section>
 
