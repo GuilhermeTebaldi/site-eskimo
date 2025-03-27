@@ -150,21 +150,21 @@ export default function Home() {
           {[
             {
               icon: (
-                <FaCampground className="mx-auto text-6xl text-lime-400 text-opacity-100" />
+                <FaCampground className="mx-auto text-6xl text-lime-500 drop-shadow-sm" />
               ),
               title: "Camping Seguro",
               desc: "Áreas amplas com infraestrutura, segurança e natureza preservada.",
             },
             {
               icon: (
-                <FaHiking className="mx-auto animate-pulse text-6xl text-emerald-400 text-opacity-100" />
+                <FaHiking className="mx-auto animate-pulse text-6xl text-emerald-500 drop-shadow-sm" />
               ),
               title: "Trilhas Guiadas",
               desc: "Explore trilhas incríveis com guias experientes e paisagens únicas.",
             },
             {
               icon: (
-                <FaTree className="animate-fade-in mx-auto text-6xl text-green-400 text-opacity-100" />
+                <FaTree className="animate-fade-in mx-auto text-6xl text-green-500 drop-shadow-sm" />
               ),
               title: "Conexão com a Natureza",
               desc: "Silêncio, ar puro, e liberdade para reconectar com sua essência.",
