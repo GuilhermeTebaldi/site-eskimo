@@ -157,14 +157,14 @@ export default function Home() {
             },
             {
               icon: (
-                <FaCampground className="mx-auto text-6xl text-lime-400 text-opacity-100" />
+                <FaHiking className="mx-auto animate-pulse text-6xl text-emerald-400" />
               ),
               title: "Trilhas Guiadas",
               desc: "Explore trilhas incríveis com guias experientes e paisagens únicas.",
             },
             {
               icon: (
-                <FaCampground className="mx-auto text-6xl text-lime-400 text-opacity-100" />
+                <FaTree className="animate-fade-in mx-auto text-6xl text-green-300" />
               ),
               title: "Conexão com a Natureza",
               desc: "Silêncio, ar puro, e liberdade para reconectar com sua essência.",
