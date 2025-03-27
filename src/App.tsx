@@ -164,7 +164,7 @@ export default function Home() {
             },
             {
               icon: (
-                <FaTree className="animate-fade-in mx-auto text-6xl text-green-500 drop-shadow-sm" />
+                <FaTree className="animate-spin-slow mx-auto text-6xl text-green-500 drop-shadow-sm" />
               ),
               title: "Conexão com a Natureza",
               desc: "Silêncio, ar puro, e liberdade para reconectar com sua essência.",
