@@ -150,7 +150,7 @@ export default function Home() {
           {[
             {
               icon: (
-                <FaCampground className="mx-auto text-6xl text-lime-500 drop-shadow-sm" />
+                <FaCampground className="mx-auto animate-bounce text-6xl text-lime-500 drop-shadow-sm" />
               ),
               title: "Camping Seguro",
               desc: "Áreas amplas com infraestrutura, segurança e natureza preservada.",
