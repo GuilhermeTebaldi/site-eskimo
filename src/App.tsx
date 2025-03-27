@@ -157,14 +157,14 @@ export default function Home() {
             },
             {
               icon: (
-                <FaHiking className="mx-auto animate-pulse text-6xl text-emerald-400" />
+                <FaHiking className="mx-auto animate-pulse text-6xl text-emerald-400 text-opacity-100" />
               ),
               title: "Trilhas Guiadas",
               desc: "Explore trilhas incríveis com guias experientes e paisagens únicas.",
             },
             {
               icon: (
-                <FaTree className="animate-fade-in mx-auto text-6xl text-green-300" />
+                <FaTree className="animate-fade-in mx-auto text-6xl text-green-400 text-opacity-100" />
               ),
               title: "Conexão com a Natureza",
               desc: "Silêncio, ar puro, e liberdade para reconectar com sua essência.",
@@ -172,13 +172,13 @@ export default function Home() {
           ].map((item, i) => (
             <div
               key={i}
-              className="rounded-3xl border border-white/10 bg-black/30 p-10 shadow-xl backdrop-blur-xl transition-all duration-300 hover:shadow-green-500/30"
+              className="rounded-3xl bg-white/10 p-10 shadow-xl backdrop-blur-sm transition-all duration-300 hover:shadow-green-500/30"
             >
               <div className="mb-6">{item.icon}</div>
-              <h3 className="mb-4 text-3xl font-bold tracking-wider text-white">
+              <h3 className="mb-4 text-center text-2xl font-bold tracking-wider text-white">
                 {item.title}
               </h3>
-              <p className="text-md leading-relaxed text-white/70">
+              <p className="text-md text-center leading-relaxed text-white/70">
                 {item.desc}
               </p>
             </div>
