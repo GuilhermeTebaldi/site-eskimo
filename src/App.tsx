@@ -45,7 +45,7 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="bg-gradient-to-r from-yellow-300 via-green-400 to-lime-300 bg-clip-text text-6xl font-extrabold text-transparent drop-shadow-xl md:text-7xl"
           >
-            CAMPING TERRAMAR
+            SITIO VÓ MARLI
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
