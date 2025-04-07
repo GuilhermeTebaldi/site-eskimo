@@ -70,7 +70,7 @@ export default function TattooStudioLuxuryApp() {
     setShowModelos(false);
   };
 
-  const openLightbox = (i) => {
+  const openLightbox = (i: number) => {
     setCurrentImg(i);
     setLightboxOpen(true);
   };
