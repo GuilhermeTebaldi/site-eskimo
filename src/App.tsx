@@ -5,7 +5,6 @@ import {
   FaCalendarAlt,
   FaInstagram,
   FaHome,
-  FaUser,
   FaTimes,
   FaArrowLeft,
   FaArrowRight,
