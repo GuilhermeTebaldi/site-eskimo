@@ -164,7 +164,7 @@ export default function TattooStudioLuxuryApp() {
       <div className="px-6 py-4">
         <h2 className="mb-3 text-xl font-semibold text-yellow-300">Artista</h2>
         <div className="grid grid-cols-1 gap-4">
-          {artists.map((artist, i) => (
+          {artists.map((artist, i: number) => (
             <motion.div
               key={i}
               className="flex items-center gap-4 rounded-2xl bg-zinc-900 p-4 shadow-md"
@@ -261,11 +261,10 @@ export default function TattooStudioLuxuryApp() {
       >
         <FaHome
           className="cursor-pointer text-xl text-yellow-400"
-          onClick={() =>
-            document
-              .getElementById("topo")
-              .scrollIntoView({ behavior: "smooth" })
-          }
+          onClick={() => {
+            const topo = document.getElementById("topo");
+            if (topo) topo.scrollIntoView({ behavior: "smooth" });
+          }}
         />
         <FaStar
           className="cursor-pointer text-xl text-yellow-400"
