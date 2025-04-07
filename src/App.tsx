@@ -33,6 +33,7 @@ const galleryImages = [
   "https://i.pinimg.com/736x/61/54/fd/6154fd9ac8f371a10ac95a77cad1c048.jpg",
   "https://i.pinimg.com/736x/8f/6d/a8/8f6da8e793bb0a1999a4a9e497554b3a.jpg",
   "https://i.pinimg.com/736x/d8/71/f3/d871f37581fa3f710a8079afe4a76632.jpg",
+  " https://i.pinimg.com/736x/6f/87/80/6f8780d9675165ef6fa6746df9ce74b3.jpg",
 ];
 
 const artists = [
