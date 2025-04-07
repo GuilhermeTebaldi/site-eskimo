@@ -1,310 +1,298 @@
-// block=projeto+mod
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FaCampground,
-  FaHiking,
-  FaTree,
+  FaStar,
+  FaCalendarAlt,
   FaInstagram,
-  FaWhatsapp,
+  FaHome,
+  FaUser,
+  FaTimes,
+  FaArrowLeft,
+  FaArrowRight,
 } from "react-icons/fa";
 
-export default function Home() {
-  const [showBar, setShowBar] = useState(false);
-  const [form, setForm] = useState({
-    dia: "",
-    mes: "",
-    descricao: "",
-    tempo: "",
-  });
+const highlights = [
+  "https://i.pinimg.com/736x/4f/4d/7a/4f4d7a60d3b45201658b5952249126bc.jpg",
+  "https://i.pinimg.com/736x/3a/13/56/3a1356b52538b977f85234fae90ecaf8.jpg",
+  "https://i.pinimg.com/736x/4f/10/87/4f1087ba1c5495571a798c392183cc29.jpg",
+  "https://i.pinimg.com/736x/17/f1/2a/17f12aa39e3a9b619ddefc59c34cca71.jpg",
+];
 
-  const handleSend = () => {
-    const msg = `Olá! Quero reservar o acampamento.\n\n🗓 Dia: ${form.dia}/${form.mes}\n🕒 Tempo: ${form.tempo}\n📖 Plano: ${form.descricao}`;
-    const url = `https://wa.me/5547991971440?text=${encodeURIComponent(msg)}`;
+const galleryImages = [
+  "https://i.pinimg.com/736x/e5/81/f6/e581f6d6224cb59e5ba22af30a58fb53.jpg",
+  "https://i.pinimg.com/736x/59/92/8c/59928c31b05155e4c35c441d8ce219ed.jpg",
+  "https://i.pinimg.com/736x/ae/df/8e/aedf8ee2194bdfd6b7bd777789fc858a.jpg",
+  "https://i.pinimg.com/736x/1b/d6/f5/1bd6f59b4f80a032aeaedd2a9bf7ff39.jpg",
+  "https://i.pinimg.com/736x/db/6b/96/db6b964afa48814212a79833b4191cf3.jpg",
+  "https://i.pinimg.com/736x/85/50/75/8550759f72d5c516e704655945403720.jpg",
+  "https://i.pinimg.com/736x/48/55/ba/4855ba2899b66d4990949b483145af3f.jpg",
+  "https://i.pinimg.com/736x/53/d1/0d/53d10d629c03d4f470deb0a837ba1dde.jpg",
+  "https://i.pinimg.com/736x/67/25/a3/6725a3ae50792c1ccaed6e0de50f2454.jpg",
+  "https://i.pinimg.com/736x/1b/76/42/1b76423a22bc71f1541f5406bbf29c7e.jpg",
+  "https://i.pinimg.com/736x/3f/02/c1/3f02c1a16a67a2683b300b6954da0a8b.jpg",
+  "https://i.pinimg.com/736x/af/c3/f0/afc3f0aa8f6c44ac03a8d65394f98a93.jpg",
+  "https://i.pinimg.com/736x/61/54/fd/6154fd9ac8f371a10ac95a77cad1c048.jpg",
+  "https://i.pinimg.com/736x/8f/6d/a8/8f6da8e793bb0a1999a4a9e497554b3a.jpg",
+  "https://i.pinimg.com/736x/d8/71/f3/d871f37581fa3f710a8079afe4a76632.jpg",
+];
+
+const artists = [
+  {
+    name: "DANIEL DAVI",
+    image:
+      "https://i.pinimg.com/736x/bd/a9/9c/bda99ccdb2ce7cd3d18d1fc98ff2bec5.jpg",
+  },
+];
+
+export default function TattooStudioLuxuryApp() {
+  const [index, setIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImg, setCurrentImg] = useState(0);
+  const [showModelos, setShowModelos] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [nome, setNome] = useState("");
+  const [estilo, setEstilo] = useState("");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % highlights.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const enviarWhatsApp = () => {
+    const msg = `Olá! Meu nome é ${nome}. Gostaria de agendar uma tatuagem no estilo: ${estilo}`;
+    const url = `https://wa.me/SEUNUMERO?text=${encodeURIComponent(msg)}`;
     window.open(url, "_blank");
   };
 
+  const closePanels = () => {
+    setShowForm(false);
+    setShowModelos(false);
+  };
+
+  const openLightbox = (i) => {
+    setCurrentImg(i);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => setLightboxOpen(false);
+  const prevImage = () =>
+    setCurrentImg(
+      (prev) => (prev - 1 + galleryImages.length) % galleryImages.length,
+    );
+  const nextImage = () =>
+    setCurrentImg((prev) => (prev + 1) % galleryImages.length);
+
   return (
-    <div className="relative z-0 overflow-x-hidden bg-gradient-to-br from-green-900 via-emerald-800 to-teal-900 font-sans text-white">
-      {/* HERO - CAMPING NATURAL */}
-      <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <img
-            src="https://i.pinimg.com/736x/6f/08/ae/6f08aefe7410ef59f354a7f3a0ed0fa9.jpg"
-            alt="Fundo personalizado"
-            className="h-full w-full object-cover opacity-30"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-green-900/60 to-emerald-900/60" />
-        </div>
-
-        <motion.div className="z-10 flex w-full flex-col items-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="bg-gradient-to-r from-yellow-300 via-green-400 to-lime-300 bg-clip-text text-6xl font-extrabold text-transparent drop-shadow-xl md:text-7xl"
-          >
-            SITIO VÓ MARLI
-          </motion.h1>
-          <motion.p
+    <div
+      className="text-gold min-h-screen scroll-smooth bg-gradient-to-b from-black via-zinc-900 to-black pb-24 font-sans"
+      id="topo"
+      onClick={closePanels}
+    >
+      <div className="relative h-60 w-full overflow-hidden sm:h-80">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={highlights[index]}
+            src={highlights[index]}
+            alt="destaque"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="mt-6 max-w-2xl text-xl text-white/80 md:text-2xl"
-          >
-            Um refúgio natural para quem busca liberdade, natureza e aventura ao
-            ar livre.
-          </motion.p>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            className="z-10 mt-10 rounded-full bg-gradient-to-r from-lime-400 to-green-500 px-10 py-4 font-extrabold text-black shadow-xl"
-            onClick={() => setShowBar(true)}
-          >
-            Reservar Acampamento
-          </motion.button>
-        </motion.div>
-
-        <AnimatePresence>
-          {showBar && (
-            <motion.div
-              initial={{ y: 300, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 300, opacity: 0 }}
-              transition={{ duration: 0.6, type: "spring" }}
-              className="fixed inset-0 z-50 flex items-end justify-center backdrop-blur-md"
-              onClick={() => setShowBar(false)} // clica fora e fecha
-            >
-              {/* Container da barra reserva */}
-              <motion.div
-                onClick={(e) => e.stopPropagation()} // impede o clique interno de fechar
-                initial={{ y: 300, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 300, opacity: 0 }}
-                transition={{ duration: 0.6, type: "spring" }}
-                className="relative w-full max-w-4xl border-t border-lime-400/20 bg-lime-300/20 p-6 shadow-2xl backdrop-blur-xl md:p-10"
-              >
-                {/* Botão (X) */}
-                <button
-                  onClick={() => setShowBar(false)}
-                  className="absolute right-4 top-4 text-xl font-bold text-white hover:text-red-400"
-                >
-                  ✕
-                </button>
-
-                {/* Campos do formulário */}
-                <div className="grid items-end gap-6 md:grid-cols-2">
-                  <input
-                    type="text"
-                    placeholder="Dia"
-                    value={form.dia}
-                    onChange={(e) => setForm({ ...form, dia: e.target.value })}
-                    className="w-full rounded-xl bg-white/10 p-4 text-white placeholder-white/60"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Mês"
-                    value={form.mes}
-                    onChange={(e) => setForm({ ...form, mes: e.target.value })}
-                    className="w-full rounded-xl bg-white/10 p-4 text-white placeholder-white/60"
-                  />
-                  <input
-                    type="text"
-                    placeholder="O que pretende fazer?"
-                    value={form.descricao}
-                    onChange={(e) =>
-                      setForm({ ...form, descricao: e.target.value })
-                    }
-                    className="col-span-2 w-full rounded-xl bg-white/10 p-4 text-white placeholder-white/60"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Tempo de permanência"
-                    value={form.tempo}
-                    onChange={(e) =>
-                      setForm({ ...form, tempo: e.target.value })
-                    }
-                    className="w-full rounded-xl bg-white/10 p-4 text-white placeholder-white/60"
-                  />
-                  <button
-                    onClick={handleSend}
-                    className="rounded-full bg-gradient-to-r from-green-400 to-lime-400 px-6 py-4 font-bold text-black shadow-lg transition hover:scale-105"
-                  >
-                    OK & Enviar para WhatsApp
-                  </button>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute left-0 top-0 h-full w-full scale-105 object-cover"
+          />
         </AnimatePresence>
-      </section>
+      </div>
 
-      {/* EXPERIÊNCIAS DE CAMPO */}
-      <section className="border-t border-white/10 bg-white/5 px-6 py-32 backdrop-blur-md">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto grid max-w-6xl gap-12 text-center md:grid-cols-3"
+      <div className="px-4 py-10 text-center">
+        <h1 className="bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-100 bg-clip-text font-serif text-4xl font-black uppercase tracking-widest text-transparent drop-shadow-[0_3px_6px_rgba(255,215,0,0.8)]">
+          ✦ Davi Tattoo Studio ✦
+        </h1>
+        <p className="mt-3 text-base italic text-yellow-300">
+          Arte na pele com identidade e alma
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 px-4 py-6 sm:grid-cols-3">
+        {galleryImages.map((src, i) => (
+          <motion.img
+            key={i}
+            src={src}
+            alt="tattoo grid"
+            className="aspect-square w-full cursor-pointer rounded-xl object-cover shadow-xl hover:ring-2 hover:ring-yellow-400/60"
+            whileHover={{ scale: 1.03 }}
+            onClick={() => openLightbox(i)}
+          />
+        ))}
+      </div>
+
+      {lightboxOpen && (
+        <div
+          onClick={closeLightbox}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
         >
-          {[
-            {
-              icon: (
-                <FaCampground className="mx-auto animate-bounce text-6xl text-lime-600 drop-shadow-md" />
-              ),
-              title: "Camping Seguro",
-              desc: "Áreas amplas com infraestrutura, segurança e natureza preservada.",
-            },
-            {
-              icon: (
-                <FaHiking className="mx-auto animate-pulse text-6xl text-emerald-600 drop-shadow-md" />
-              ),
-              title: "Trilhas Guiadas",
-              desc: "Explore trilhas incríveis com guias experientes e paisagens únicas.",
-            },
-            {
-              icon: (
-                <FaTree className="mx-auto animate-bounce text-6xl text-green-600 drop-shadow-md" />
-              ),
-              title: "Conexão com a Natureza",
-              desc: "Silêncio, ar puro, e liberdade para reconectar com sua essência.",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="rounded-3xl bg-black/20 p-10 shadow-xl transition-all duration-300 hover:shadow-green-500/30"
-            >
-              <div className="mb-6">{item.icon}</div>
-              <h3 className="mb-4 text-center text-2xl font-bold tracking-wider text-white">
-                {item.title}
-              </h3>
-              <p className="text-md text-center leading-relaxed text-white/70">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* INFORMAÇÕES DE LOCAÇÃO */}
-      <section className="border-t border-white/10 bg-gradient-to-br from-green-900 via-emerald-800 to-teal-900 px-6 py-28">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2"
-        >
-          {/* Bloco de texto */}
-          <div className="text-white">
-            <h2 className="mb-6 text-4xl font-black text-lime-400">
-              🎉 Espaço para Eventos
-            </h2>
-            <p className="text-lg leading-relaxed text-white/80">
-              Locação ideal para{" "}
-              <strong>confraternizações, aniversários, festas</strong> e muito
-              mais — com estrutura completa em meio à natureza.
-            </p>
-            <div className="text-md mt-6 space-y-2 text-white/70">
-              <p>
-                <strong>📍 Local:</strong> Estrada Geral B. São Brás, 1707 -
-                Balneário Piçarras, SC
-              </p>
-              <p>
-                <strong>📞 Contato:</strong> (47) 99197-1440
-              </p>
-            </div>
-          </div>
-
-          {/* Bloco visual com ícone animado */}
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6, type: "spring" }}
-            className="rounded-3xl border border-lime-400/30 bg-white/5 p-10 text-center shadow-xl backdrop-blur-md"
+          <div
+            className="relative mx-4 w-full max-w-md"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="mb-4 animate-bounce text-6xl">📍</div>
-            <h3 className="mb-2 text-2xl font-bold text-white">
-              Sítio para seu próximo evento
-            </h3>
-            <p className="text-white/70">
-              Faça momentos incríveis acontecerem em um ambiente natural e
-              aconchegante.
-            </p>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* DEPOIMENTOS */}
-      <section className="px-6 py-28">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto max-w-4xl text-center"
-        >
-          <h2 className="mb-12 text-4xl font-bold text-white">
-            O que nossos campistas dizem
-          </h2>
-          <div className="grid gap-10 md:grid-cols-2">
-            {[
-              {
-                name: "Cristiane",
-                quote:
-                  "Foi uma experiência transformadora. Dormir sob as estrelas é algo que nunca esquecerei.",
-              },
-              {
-                name: "Guilherme",
-                quote:
-                  "Voltei mais leve, mais conectado. A estrutura é incrível e a vibe, indescritível.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.03 }}
-                className="rounded-xl border border-white/10 bg-white/5 p-8 shadow-xl transition-all duration-300 hover:shadow-lime-400/20"
-              >
-                <p className="text-lg italic text-white/80">"{item.quote}"</p>
-                <p className="mt-4 font-semibold text-lime-300">
-                  – {item.name}
-                </p>
-              </motion.div>
-            ))}
+            <img
+              src={galleryImages[currentImg]}
+              className="h-auto w-full rounded-xl object-contain"
+            />
+            <button
+              onClick={closeLightbox}
+              className="text-gold absolute right-2 top-2 text-2xl"
+            >
+              <FaTimes />
+            </button>
+            <div
+              className="text-gold absolute left-0 top-1/2 -translate-y-1/2 cursor-pointer px-3 text-2xl"
+              onClick={prevImage}
+            >
+              <FaArrowLeft />
+            </div>
+            <div
+              className="text-gold absolute right-0 top-1/2 -translate-y-1/2 cursor-pointer px-3 text-2xl"
+              onClick={nextImage}
+            >
+              <FaArrowRight />
+            </div>
           </div>
-        </motion.div>
-      </section>
-
-      {/* CTA FINAL */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-lime-300 via-green-400 to-emerald-500 px-6 py-28 text-center text-black">
-        <motion.h2
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7 }}
-          className="mb-6 text-5xl font-black drop-shadow-xl"
-        >
-          Respire fundo. Viva a liberdade.
-        </motion.h2>
-        <p className="mb-8 text-lg">
-          Reserve agora sua experiência no Camp Terra Livre e renove sua alma.
-        </p>
-        <button className="rounded-full bg-black px-12 py-4 font-semibold text-white shadow-xl hover:bg-zinc-900">
-          Quero Acampar
-        </button>
-      </section>
-
-      {/* RODAPÉ CAMPING */}
-      <footer className="border-t border-white/10 bg-black py-12 text-center text-white">
-        <div className="mb-6 flex justify-center gap-6">
-          <a href="#" className="transition duration-300 hover:text-green-300">
-            <FaInstagram size={24} />
-          </a>
-          <a href="#" className="transition duration-300 hover:text-lime-300">
-            <FaWhatsapp size={24} />
-          </a>
         </div>
-        <p className="text-sm text-white/40">
-          &copy; 2025 Camp Terra Livre — Sua liberdade começa aqui.
-        </p>
-      </footer>
+      )}
+
+      <div className="px-6 py-4">
+        <h2 className="mb-3 text-xl font-semibold text-yellow-300">Artista</h2>
+        <div className="grid grid-cols-1 gap-4">
+          {artists.map((artist, i) => (
+            <motion.div
+              key={i}
+              className="flex items-center gap-4 rounded-2xl bg-zinc-900 p-4 shadow-md"
+              whileHover={{ scale: 1.02 }}
+            >
+              <img
+                src={artist.image}
+                alt={artist.name}
+                className="border-gold h-16 w-16 rounded-full border-2 object-cover"
+              />
+              <div>
+                <p className="text-lg font-bold uppercase tracking-wide text-yellow-400">
+                  {artist.name}
+                </p>
+                <p className="text-sm text-yellow-200">
+                  Especialista em realismo e arte custom
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Painel Modelos */}
+      {showModelos && (
+        <motion.div
+          initial={{ y: 300 }}
+          animate={{ y: 0 }}
+          exit={{ y: 300 }}
+          className="fixed bottom-20 left-0 right-0 z-40 rounded-t-2xl bg-zinc-900/95 p-6 text-center shadow-inner backdrop-blur-md"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={() => setShowModelos(false)}
+            className="absolute right-4 top-3 text-xl text-yellow-300"
+          >
+            <FaTimes />
+          </button>
+          <h3 className="mb-2 text-lg font-bold">Outros Modelos</h3>
+          <p className="text-sm text-yellow-300">
+            Em breve catálogo artístico exclusivo!
+          </p>
+        </motion.div>
+      )}
+
+      {/* Formulário Agendar */}
+      {showForm && (
+        <motion.div
+          initial={{ y: 300 }}
+          animate={{ y: 0 }}
+          exit={{ y: 300 }}
+          className="fixed bottom-20 left-0 right-0 z-50 rounded-t-3xl border-t border-yellow-400 bg-black/90 p-6 backdrop-blur-md"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={() => setShowForm(false)}
+            className="absolute right-4 top-3 text-xl text-yellow-300"
+          >
+            <FaTimes />
+          </button>
+          <h3 className="mb-4 text-center text-xl font-black text-yellow-300">
+            Agendar Horário
+          </h3>
+          <input
+            type="text"
+            placeholder="Seu nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            className="mb-3 w-full rounded-md border border-yellow-500 bg-zinc-800 p-3 text-yellow-300 placeholder:text-yellow-200"
+          />
+          <input
+            type="text"
+            placeholder="Estilo de tatuagem"
+            value={estilo}
+            onChange={(e) => setEstilo(e.target.value)}
+            className="mb-3 w-full rounded-md border border-yellow-500 bg-zinc-800 p-3 text-white placeholder:text-zinc-400"
+          />
+          <button
+            onClick={enviarWhatsApp}
+            className="w-full rounded-full bg-yellow-400 py-3 text-lg font-bold text-black shadow-lg hover:bg-yellow-300"
+          >
+            Confirmar & Enviar
+          </button>
+        </motion.div>
+      )}
+
+      {/* Barra de navegação */}
+      <motion.div
+        className="fixed bottom-0 z-50 flex w-full justify-around border-t border-zinc-700/70 bg-zinc-950/95 px-6 py-3 backdrop-blur-sm"
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <FaHome
+          className="cursor-pointer text-xl text-yellow-400"
+          onClick={() =>
+            document
+              .getElementById("topo")
+              .scrollIntoView({ behavior: "smooth" })
+          }
+        />
+        <FaStar
+          className="cursor-pointer text-xl text-yellow-400"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowModelos(true);
+          }}
+        />
+        <FaInstagram
+          className="cursor-pointer text-xl text-yellow-400"
+          onClick={(e) => {
+            e.stopPropagation();
+            window.open("https://instagram.com", "_blank");
+          }}
+        />
+        <div
+          className="flex cursor-pointer flex-col items-center text-yellow-400"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowForm(true);
+          }}
+        >
+          <FaCalendarAlt className="text-xl" />
+          <span className="mt-1 text-[10px] leading-tight">Agendar</span>
+        </div>
+      </motion.div>
     </div>
   );
 }
