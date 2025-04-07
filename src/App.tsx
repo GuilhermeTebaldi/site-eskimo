@@ -107,7 +107,7 @@ export default function TattooStudioLuxuryApp() {
 
       <div className="px-4 py-10 text-center">
         <h1 className="bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-100 bg-clip-text font-serif text-4xl font-black uppercase tracking-widest text-transparent drop-shadow-[0_3px_6px_rgba(255,215,0,0.8)]">
-          ✦ Davi Tattoo ✦
+          Davi Tattoo
         </h1>
         <p className="mt-3 text-base italic text-yellow-300">
           Arte na pele com identidade e alma
