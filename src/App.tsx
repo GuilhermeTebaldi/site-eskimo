@@ -1,297 +1,192 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaStar,
-  FaCalendarAlt,
-  FaInstagram,
-  FaHome,
-  FaTimes,
-  FaArrowLeft,
-  FaArrowRight,
-} from "react-icons/fa";
+import React from "react";
+import { Helmet } from "react-helmet";
 
-const highlights = [
-  "https://i.pinimg.com/736x/4f/4d/7a/4f4d7a60d3b45201658b5952249126bc.jpg",
-  "https://i.pinimg.com/736x/3a/13/56/3a1356b52538b977f85234fae90ecaf8.jpg",
-  "https://i.pinimg.com/736x/4f/10/87/4f1087ba1c5495571a798c392183cc29.jpg",
-  "https://i.pinimg.com/736x/17/f1/2a/17f12aa39e3a9b619ddefc59c34cca71.jpg",
-];
-
-const galleryImages = [
-  "https://i.pinimg.com/736x/e5/81/f6/e581f6d6224cb59e5ba22af30a58fb53.jpg",
-  "https://i.pinimg.com/736x/59/92/8c/59928c31b05155e4c35c441d8ce219ed.jpg",
-  "https://i.pinimg.com/736x/ae/df/8e/aedf8ee2194bdfd6b7bd777789fc858a.jpg",
-  "https://i.pinimg.com/736x/1b/d6/f5/1bd6f59b4f80a032aeaedd2a9bf7ff39.jpg",
-  "https://i.pinimg.com/736x/db/6b/96/db6b964afa48814212a79833b4191cf3.jpg",
-  "https://i.pinimg.com/736x/85/50/75/8550759f72d5c516e704655945403720.jpg",
-  "https://i.pinimg.com/736x/48/55/ba/4855ba2899b66d4990949b483145af3f.jpg",
-  "https://i.pinimg.com/736x/53/d1/0d/53d10d629c03d4f470deb0a837ba1dde.jpg",
-  "https://i.pinimg.com/736x/67/25/a3/6725a3ae50792c1ccaed6e0de50f2454.jpg",
-  "https://i.pinimg.com/736x/1b/76/42/1b76423a22bc71f1541f5406bbf29c7e.jpg",
-  "https://i.pinimg.com/736x/3f/02/c1/3f02c1a16a67a2683b300b6954da0a8b.jpg",
-  "https://i.pinimg.com/736x/af/c3/f0/afc3f0aa8f6c44ac03a8d65394f98a93.jpg",
-  "https://i.pinimg.com/736x/61/54/fd/6154fd9ac8f371a10ac95a77cad1c048.jpg",
-  "https://i.pinimg.com/736x/8f/6d/a8/8f6da8e793bb0a1999a4a9e497554b3a.jpg",
-  "https://i.pinimg.com/736x/d8/71/f3/d871f37581fa3f710a8079afe4a76632.jpg",
-  " https://i.pinimg.com/736x/6f/87/80/6f8780d9675165ef6fa6746df9ce74b3.jpg",
-];
-
-const artists = [
-  {
-    name: "DANIEL DAVI",
-    image:
-      "https://i.pinimg.com/736x/bd/a9/9c/bda99ccdb2ce7cd3d18d1fc98ff2bec5.jpg",
-  },
-];
-
-export default function TattooStudioLuxuryApp() {
-  const [index, setIndex] = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImg, setCurrentImg] = useState(0);
-  const [showModelos, setShowModelos] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const [nome, setNome] = useState("");
-  const [estilo, setEstilo] = useState("");
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % highlights.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const enviarWhatsApp = () => {
-    const msg = `Olá! Meu nome é ${nome}. Gostaria de agendar uma tatuagem no estilo: ${estilo}`;
-    const url = `https://wa.me/SEUNUMERO?text=${encodeURIComponent(msg)}`;
-    window.open(url, "_blank");
-  };
-
-  const closePanels = () => {
-    setShowForm(false);
-    setShowModelos(false);
-  };
-
-  const openLightbox = (i: number) => {
-    setCurrentImg(i);
-    setLightboxOpen(true);
-  };
-
-  const closeLightbox = () => setLightboxOpen(false);
-  const prevImage = () =>
-    setCurrentImg(
-      (prev) => (prev - 1 + galleryImages.length) % galleryImages.length,
-    );
-  const nextImage = () =>
-    setCurrentImg((prev) => (prev + 1) % galleryImages.length);
-
+export default function App() {
   return (
-    <div
-      className="text-gold min-h-screen scroll-smooth bg-gradient-to-b from-black via-zinc-900 to-black pb-24 font-sans"
-      id="topo"
-      onClick={closePanels}
-    >
-      <div className="relative h-60 w-full overflow-hidden sm:h-80">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={highlights[index]}
-            src={highlights[index]}
-            alt="destaque"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute left-0 top-0 h-full w-full scale-105 object-cover"
-          />
-        </AnimatePresence>
-      </div>
+    <>
+      <Helmet>
+        <html lang="pt-BR" />
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Eskimo Sorvetes - Unidade Efapi</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <style>{`
+          body {
+            font-family: 'Inter', sans-serif;
+          }
+        `}</style>
+      </Helmet>
 
-      <div className="px-4 py-10 text-center">
-        <h1 className="bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-100 bg-clip-text font-serif text-4xl font-black uppercase tracking-widest text-transparent drop-shadow-[0_3px_6px_rgba(255,215,0,0.8)]">
-          Davi Tattoo
-        </h1>
-        <p className="mt-3 text-base italic text-yellow-300">
-          Arte na pele com identidade e alma
-        </p>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3 px-4 py-6 sm:grid-cols-3">
-        {galleryImages.map((src, i) => (
-          <motion.img
-            key={i}
-            src={src}
-            alt="tattoo grid"
-            className="aspect-square w-full cursor-pointer rounded-xl object-cover shadow-xl hover:ring-2 hover:ring-yellow-400/60"
-            whileHover={{ scale: 1.03 }}
-            onClick={() => openLightbox(i)}
-          />
-        ))}
-      </div>
-
-      {lightboxOpen && (
-        <div
-          onClick={closeLightbox}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
-        >
-          <div
-            className="relative mx-4 w-full max-w-md"
-            onClick={(e) => e.stopPropagation()}
-          >
+      <div className="bg-white text-gray-800">
+        {/* Header */}
+        <header className="flex flex-col items-center justify-between gap-4 px-4 py-4 shadow-md md:flex-row md:gap-0 md:px-8">
+          <div className="flex flex-col items-start">
             <img
-              src={galleryImages[currentImg]}
-              className="h-auto w-full rounded-xl object-contain"
+              src="https://eskimo.com.br/wp-content/uploads/2023/03/image-1.png"
+              alt="Eskimo Sorvetes"
+              className="h-12"
             />
-            <button
-              onClick={closeLightbox}
-              className="text-gold absolute right-2 top-2 text-2xl"
-            >
-              <FaTimes />
+            <span className="mt-1 text-6xl font-bold text-red-600">Efapi</span>
+          </div>
+
+          <nav className="flex flex-wrap justify-center gap-4 md:gap-6">
+            <a href="#" className="font-semibold text-red-600">
+              Home
+            </a>
+            <a href="#" className="hover:text-red-600">
+              Sobre
+            </a>
+            <a href="#" className="hover:text-red-600">
+              Onde Encontrar
+            </a>
+          </nav>
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
+            <button className="rounded-full border px-4 py-2 text-sm">
+              Área do Lojista
             </button>
-            <div
-              className="text-gold absolute left-0 top-1/2 -translate-y-1/2 cursor-pointer px-3 text-2xl"
-              onClick={prevImage}
-            >
-              <FaArrowLeft />
-            </div>
-            <div
-              className="text-gold absolute right-0 top-1/2 -translate-y-1/2 cursor-pointer px-3 text-2xl"
-              onClick={nextImage}
-            >
-              <FaArrowRight />
+            <button className="rounded-full bg-red-600 px-4 py-2 text-sm text-white">
+              Fale conosco
+            </button>
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <section className="relative mx-auto flex max-w-7xl flex-col items-center overflow-hidden bg-white px-6 py-12 lg:flex-row">
+          <div className="max-w-xl text-center lg:text-left">
+            <p className="text-sm font-semibold text-red-500">
+              👋 Olá! É bom ter você aqui
+            </p>
+            <h1 className="mt-2 text-4xl font-bold leading-tight md:text-5xl">
+              Sabores para <br className="hidden md:block" /> todos os gostos
+            </h1>
+            <p className="mt-4 text-gray-600">
+              Transformamos momentos em sabores. Nossos picolés e sorvetes são a
+              alegria que derrete na boca e aquece o coração.
+            </p>
+            <div className="mt-6 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
+              <button className="rounded-full bg-red-600 px-6 py-3 font-semibold text-white">
+                Ver os produtos
+              </button>
             </div>
           </div>
-        </div>
-      )}
+          <div className="relative mx-auto mt-10 w-full max-w-xs lg:ml-12 lg:mt-0">
+            <img
+              src="https://eskimo.com.br/wp-content/uploads/2023/03/Pedrinho-1-1.png"
+              alt="Mascote"
+              className="w-full"
+            />
+            <div className="absolute left-6 top-6 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium shadow-lg">
+              🍦 Sabor Incrível!{" "}
+              <span className="text-gray-500">2.874 curtidas</span>
+            </div>
+            <div className="absolute bottom-4 right-4 w-48 rounded-lg bg-white px-4 py-3 text-sm shadow-lg">
+              <p className="font-bold">⭐ Eu Adorei Tudo!</p>
+              <p className="text-xs text-gray-500">
+                Uma grande variedade de produtos...
+              </p>
+            </div>
+          </div>
+        </section>
 
-      <div className="px-6 py-4">
-        <h2 className="mb-3 text-xl font-semibold text-yellow-300">Artista</h2>
-        <div className="grid grid-cols-1 gap-4">
-          {artists.map((artist, i: number) => (
-            <motion.div
-              key={i}
-              className="flex items-center gap-4 rounded-2xl bg-zinc-900 p-4 shadow-md"
-              whileHover={{ scale: 1.02 }}
-            >
-              <img
-                src={artist.image}
-                alt={artist.name}
-                className="border-gold h-16 w-16 rounded-full border-2 object-cover"
-              />
-              <div>
-                <p className="text-lg font-bold uppercase tracking-wide text-yellow-400">
-                  {artist.name}
-                </p>
-                <p className="text-sm text-yellow-200">
-                  Especialista em realismo e arte custom
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+        {/* Destaques */}
+        <section className="grid grid-cols-1 gap-6 bg-red-600 px-6 py-10 text-center text-white sm:grid-cols-2 md:grid-cols-4">
+          <div>
+            <div className="text-3xl">🏆</div>
+            <h3 className="mt-2 font-bold">Maior da América Latina</h3>
+            <p className="text-sm">
+              Somos a maior fabricante de picolés da América Latina
+            </p>
+          </div>
+          <div>
+            <div className="text-3xl">🏠</div>
+            <h3 className="mt-2 font-bold">+1300 pontos de vendas</h3>
+            <p className="text-sm">
+              Mais de 100 lojas filiais e 1300 pontos de venda
+            </p>
+          </div>
+          <div>
+            <div className="text-3xl">😊</div>
+            <h3 className="mt-2 font-bold">+100 variações de produtos</h3>
+            <p className="text-sm">
+              Grande variedade com mais de 100 apresentações
+            </p>
+          </div>
+          <div>
+            <div className="text-3xl">💰</div>
+            <h3 className="mt-2 font-bold">Preço de fábrica</h3>
+            <p className="text-sm">
+              Produtos direto da fábrica para o consumidor
+            </p>
+          </div>
+        </section>
 
-      {/* Painel Modelos */}
-      {showModelos && (
-        <motion.div
-          initial={{ y: 300 }}
-          animate={{ y: 0 }}
-          exit={{ y: 300 }}
-          className="fixed bottom-20 left-0 right-0 z-40 rounded-t-2xl bg-zinc-900/95 p-6 text-center shadow-inner backdrop-blur-md"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button
-            onClick={() => setShowModelos(false)}
-            className="absolute right-4 top-3 text-xl text-yellow-300"
-          >
-            <FaTimes />
-          </button>
-          <h3 className="mb-2 text-lg font-bold">Outros Modelos</h3>
-          <p className="text-sm text-yellow-300">
-            Em breve catálogo artístico exclusivo!
+        {/* Produtos */}
+        <section className="mx-auto max-w-4xl px-6 py-12 text-center">
+          <img
+            src="https://eskimo.com.br/wp-content/uploads/2023/03/Group-86-1-1.png"
+            alt="Linha de produtos"
+            className="mx-auto w-64"
+          />
+          <h2 className="mt-6 text-2xl font-bold">
+            Conheça nossa linha de produtos
+          </h2>
+          <p className="mt-2 text-gray-600">
+            Receitas que unem compostos de primeira-linha nacionais e
+            internacionais.
           </p>
-        </motion.div>
-      )}
-
-      {/* Formulário Agendar */}
-      {showForm && (
-        <motion.div
-          initial={{ y: 300 }}
-          animate={{ y: 0 }}
-          exit={{ y: 300 }}
-          className="fixed bottom-20 left-0 right-0 z-50 rounded-t-3xl border-t border-yellow-400 bg-black/90 p-6 backdrop-blur-md"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button
-            onClick={() => setShowForm(false)}
-            className="absolute right-4 top-3 text-xl text-yellow-300"
-          >
-            <FaTimes />
+          <button className="mt-6 rounded-full bg-yellow-400 px-6 py-3 font-semibold text-white hover:bg-yellow-500">
+            Ver todos os produtos
           </button>
-          <h3 className="mb-4 text-center text-xl font-black text-yellow-300">
-            Agendar Horário
-          </h3>
-          <input
-            type="text"
-            placeholder="Seu nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            className="mb-3 w-full rounded-md border border-yellow-500 bg-zinc-800 p-3 text-yellow-300 placeholder:text-yellow-200"
-          />
-          <input
-            type="text"
-            placeholder="Estilo de tatuagem"
-            value={estilo}
-            onChange={(e) => setEstilo(e.target.value)}
-            className="mb-3 w-full rounded-md border border-yellow-500 bg-zinc-800 p-3 text-white placeholder:text-zinc-400"
-          />
-          <button
-            onClick={enviarWhatsApp}
-            className="w-full rounded-full bg-yellow-400 py-3 text-lg font-bold text-black shadow-lg hover:bg-yellow-300"
-          >
-            Confirmar & Enviar
-          </button>
-        </motion.div>
-      )}
+        </section>
 
-      {/* Barra de navegação */}
-      <motion.div
-        className="fixed bottom-0 z-50 flex w-full justify-around border-t border-zinc-700/70 bg-zinc-950/95 px-6 py-3 backdrop-blur-sm"
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <FaHome
-          className="cursor-pointer text-xl text-yellow-400"
-          onClick={() => {
-            const topo = document.getElementById("topo");
-            if (topo) topo.scrollIntoView({ behavior: "smooth" });
-          }}
-        />
-        <FaStar
-          className="cursor-pointer text-xl text-yellow-400"
-          onClick={(e) => {
-            e.stopPropagation();
-            setShowModelos(true);
-          }}
-        />
-        <FaInstagram
-          className="cursor-pointer text-xl text-yellow-400"
-          onClick={(e) => {
-            e.stopPropagation();
-            window.open("https://instagram.com", "_blank");
-          }}
-        />
-        <div
-          className="flex cursor-pointer flex-col items-center text-yellow-400"
-          onClick={(e) => {
-            e.stopPropagation();
-            setShowForm(true);
-          }}
-        >
-          <FaCalendarAlt className="text-xl" />
-          <span className="mt-1 text-[10px] leading-tight">Agendar</span>
-        </div>
-      </motion.div>
-    </div>
+        {/* Bob Esponja Section */}
+        <section className="mx-auto max-w-5xl px-6">
+          <img
+            src="bob-esponja-banner.png"
+            alt="Picolé do Bob Esponja e Patrick"
+            className="w-full rounded-xl"
+          />
+        </section>
+
+        {/* Lojas */}
+        <section className="mx-auto grid max-w-5xl items-center gap-6 px-6 py-12 md:grid-cols-2">
+          <div>
+            <h2 className="text-2xl font-bold">
+              Mega lojas espalhadas pelo Brasil
+            </h2>
+            <p className="mt-2 text-gray-600">
+              De Norte a Sul, refrescando o paladar dos brasileiros. A presença
+              marcante da nossa marca pelo país.
+            </p>
+            <button className="mt-6 rounded-full bg-red-600 px-6 py-3 font-semibold text-white">
+              Ver todas as unidades
+            </button>
+          </div>
+          <img
+            src="loja-eskimo.png"
+            alt="Loja física"
+            className="w-full rounded-xl"
+          />
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-gray-100 py-6 text-center text-sm text-gray-500">
+          © 2025 Eskimo Sorvetes - Unidade Efapi. Todos os direitos reservados.
+        </footer>
+      </div>
+    </>
   );
 }
