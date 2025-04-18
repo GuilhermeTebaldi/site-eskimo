@@ -1,4 +1,3 @@
-import React from "react";
 import { Helmet } from "react-helmet";
 
 export default function App() {
@@ -39,12 +38,12 @@ export default function App() {
               alt="Eskimo Sorvetes"
               className="h-12"
             />
-            <span className="mt-1 text-6xl font-bold text-red-600">Efapi</span>
+            <span className="mt-1 text-5xl font-bold text-red-600">Efapi</span>
           </div>
 
           <nav className="flex flex-wrap justify-center gap-4 md:gap-6">
             <a href="#" className="font-semibold text-red-600">
-              Home
+              Inicio
             </a>
             <a href="#" className="hover:text-red-600">
               Sobre
