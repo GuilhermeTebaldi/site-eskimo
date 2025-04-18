@@ -16,52 +16,112 @@ export default function App() {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin="anonymous" // ✅ Corrigido aqui!
+          crossOrigin="anonymous"
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
         <style>{`
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-  `}</style>
+          body {
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+          }
+          @keyframes slideDown {
+            from {
+              opacity: 0;
+              transform: translateY(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-20px);
+            }
+          }
+          @keyframes pulseOrb {
+            0%, 100% {
+              transform: scale(1);
+              opacity: 0.15;
+            }
+            50% {
+              transform: scale(1.1);
+              opacity: 0.3;
+            }
+          }
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .orb {
+            position: absolute;
+            border-radius: 9999px;
+            z-index: 0;
+            animation: pulseOrb 4s infinite ease-in-out;
+          }
+          .fade-in {
+            animation: fadeInUp 1s ease-out forwards;
+          }
+        `}</style>
       </Helmet>
+      <div className="relative overflow-hidden bg-white text-gray-800">
+        {/* Orbs decorativas com efeito de brilho */}
+        <div className="orb left-[-80px] top-[-80px] h-56 w-56 bg-red-300"></div>
+        <div className="orb bottom-[-60px] right-[-60px] h-40 w-40 bg-yellow-300"></div>
+        <div className="orb left-[-40px] top-1/2 h-32 w-32 bg-red-100"></div>
 
-      <div className="bg-white text-gray-800">
         {/* Header */}
-        <header className="flex flex-col items-center justify-between gap-4 px-4 py-4 shadow-md md:flex-row md:gap-0 md:px-8">
-          <div className="flex flex-col items-start">
+        <header className="fade-in relative z-10 flex flex-col items-center justify-between gap-4 px-4 py-4 shadow-md md:flex-row md:gap-0 md:px-8">
+          <div className="fade-in flex flex-col items-start">
             <img
               src="https://eskimo.com.br/wp-content/uploads/2023/03/image-1.png"
               alt="Eskimo Sorvetes"
-              className="h-12"
+              className="fade-in h-10 transition-transform duration-500 hover:scale-110"
             />
             <span className="mt-1 text-5xl font-bold text-red-600">Efapi</span>
           </div>
 
-          <nav className="flex flex-wrap justify-center gap-4 md:gap-6">
-            <a href="#" className="font-semibold text-red-600">
+          <nav className="fade-in flex flex-wrap justify-center gap-4 md:gap-6">
+            <a
+              href="#"
+              className="font-semibold text-red-600 transition-colors duration-300 hover:text-red-800"
+            >
               Inicio
             </a>
-            <a href="#" className="hover:text-red-600">
+            <a href="#" className="transition duration-300 hover:text-red-600">
               Sobre
             </a>
-            <a href="#" className="hover:text-red-600">
+            <a href="#" className="transition duration-300 hover:text-red-600">
               Onde Encontrar
             </a>
           </nav>
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
-            <button className="rounded-full border px-4 py-2 text-sm">
+          <div className="fade-in flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
+            <a
+              href="https://admin-panel-eskimo.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-full border px-4 py-2 text-center text-sm font-medium text-red-600 shadow-md transition hover:bg-red-100"
+            >
               Área do Lojista
-            </button>
-            <button className="rounded-full bg-red-600 px-4 py-2 text-sm text-white">
+            </a>
+            <button className="rounded-full bg-red-600 px-4 py-2 text-sm text-white shadow-md transition duration-300 hover:bg-red-700">
               Fale conosco
             </button>
           </div>
         </header>
-
         {/* Hero Section */}
         <section className="relative mx-auto flex max-w-7xl flex-col items-center overflow-hidden bg-white px-6 py-12 lg:flex-row">
           <div className="max-w-xl text-center lg:text-left">
@@ -81,12 +141,13 @@ export default function App() {
               </button>
             </div>
           </div>
-          <div className="relative mx-auto mt-10 w-full max-w-xs lg:ml-12 lg:mt-0">
+          <div className="mt-15 relative mx-auto w-full max-w-xs lg:ml-12 lg:mt-0">
             <img
               src="https://eskimo.com.br/wp-content/uploads/2023/03/Pedrinho-1-1.png"
               alt="Mascote"
-              className="w-full"
+              className="mx-auto w-[320px]"
             />
+
             <div className="absolute left-6 top-6 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium shadow-lg">
               🍦 Sabor Incrível!{" "}
               <span className="text-gray-500">2.874 curtidas</span>
