@@ -4,9 +4,17 @@ import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+}
+
 export default function HomePublic() {
-  const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
@@ -86,7 +94,7 @@ export default function HomePublic() {
             <h1 className="mt-2 text-4xl font-bold leading-tight md:text-5xl">Sabores para <br className="hidden md:block" /> todos os gostos</h1>
             <p className="mt-4 text-gray-600">Transformamos momentos em sabores. Nossos picolés e sorvetes são a alegria que derrete na boca e aquece o coração.</p>
             <div className="mt-6 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-              <button className="rounded-full bg-red-600 px-6 py-3 font-semibold text-white">Ver os produtos</button>
+              <a href="#produtos" className="rounded-full bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700">Ver os produtos</a>
             </div>
           </div>
 
@@ -104,7 +112,7 @@ export default function HomePublic() {
             <p className="text-red-600 font-semibold text-center">{error}</p>
           ) : (
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-              {products.map(product => (
+              {products.map((product) => (
                 <div key={product.id} className="border rounded-xl p-4 shadow-sm bg-white">
                   <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-cover rounded" />
                   <h4 className="mt-4 text-lg font-semibold">{product.name}</h4>
